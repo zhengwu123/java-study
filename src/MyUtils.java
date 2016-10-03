@@ -9,7 +9,9 @@ public class MyUtils {
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
-    public static boolean isNumeric(String str){
+    public static boolean isNumeric2(String str){
+        if(str ==null|| str.isEmpty())
+            return false;
 
         for (char c : str.toCharArray())
         {
@@ -18,8 +20,11 @@ public class MyUtils {
         return true;
     }
 
-    public static boolean isNumeric2(String str)
+    public static boolean isNumeric(String str)
     {
+        if(str==null || str.isEmpty())
+            return false;
+        //regex approach
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
 
