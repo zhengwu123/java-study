@@ -20,30 +20,34 @@ public class FAFSAGUI {
             JOptionPane.showMessageDialog(null, "Welcome to the FAFSA!", "Welcome", 1);
 
             int selectedOption0 = JOptionPane.showConfirmDialog(null, "Have you accepted into a degree or certificate program?", "Program Acceptance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (selectedOption0 == JOptionPane.NO_OPTION)
+            if (selectedOption0 == JOptionPane.NO_OPTION) {
                 isAccepted = false;
-            else
+            }
+            else {
                 isAccepted = true;
-
+            }
             int register = JOptionPane.showConfirmDialog(null, "Are you registered for the selective service?", "Selective service", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-            if (register == JOptionPane.NO_OPTION)
+            if (register == JOptionPane.NO_OPTION) {
                 registered = false;
-            else
+            }
+            else {
                 registered = true;
-
+            }
             int selectedOption1 = JOptionPane.showConfirmDialog(null, "Do you have a social security number?", "Social Security number", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (selectedOption1 == JOptionPane.NO_OPTION)
+            if (selectedOption1 == JOptionPane.NO_OPTION) {
                 hasSocialSecurity = false;
-            else
+            }
+            else {
                 hasSocialSecurity = true;
-
+            }
             int selectedOption2 = JOptionPane.showConfirmDialog(null, "Do you have a valid residency status?", "Residency status", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (selectedOption2 == JOptionPane.NO_OPTION)
+            if (selectedOption2 == JOptionPane.NO_OPTION) {
                 validResidenceStatus = false;
-            else
+            }
+            else {
                 validResidenceStatus = true;
-
+            }
             boolean passed = false;
             do {
                 // Create a drop-down menu dialog with various options
@@ -132,10 +136,12 @@ public class FAFSAGUI {
 
             int useagain = JOptionPane.showConfirmDialog(null, "Would you like to complete another application?", "Continue", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-            if (register == JOptionPane.YES_OPTION)
+            if (useagain == JOptionPane.YES_OPTION) {
                 continueusing = true;
-            else
+            }
+            else {
                 continueusing = false;
+            }
         }
         while (continueusing);
         JOptionPane.showMessageDialog(null,"Thanks for using FAFSA,bye!","bye",1);
