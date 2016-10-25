@@ -18,6 +18,7 @@ public class FoilMakerClient1 {
     private JCheckBox baconCheckBox;
     private JButton submitButton;
     private JTextArea textArea1;
+    private JPasswordField passwordField1;
 
     public FoilMakerClient1() {
         submitButton.addActionListener(new ActionListener() {
