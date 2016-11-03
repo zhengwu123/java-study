@@ -43,6 +43,7 @@ public class FoilMakerClient extends JFrame {
     JLabel resultlabel2 = new JLabel("                                             ");
     JLabel resultlabel3 = new JLabel("                                             ");
     JLabel resultlabel4 = new JLabel("Joined game: waiting for leader                     ");
+    JLabel resultlabel5 = new JLabel("                                             ");
     JLabel namelabel = new JLabel("username:");
     JLabel passlabel = new JLabel("Password:");
     Border border = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
@@ -109,7 +110,7 @@ public class FoilMakerClient extends JFrame {
         Registerbutton.addActionListener(e);
         Loginbutton.addActionListener(e);
         String serverIP = "localhost";
-        int serverPort = 2002;
+        int serverPort = 2004;
         try
 
         {
@@ -192,6 +193,8 @@ public class FoilMakerClient extends JFrame {
         c.insets = new Insets(5, 100, 5, 5);
         waitingGamePanel.add(startGamebutton, c);
         startGamebutton.addActionListener(e);
+        startGamebutton.setEnabled(false);
+        boolean peoplejoined;
         //add result label
         c.gridx = 0;
         c.gridy = 5;
@@ -273,7 +276,7 @@ public class FoilMakerClient extends JFrame {
                     String serverMessage = in.readLine();
                     if(serverMessage.contains("SUCCESS")) {
                         resultlabel1.setText("success,user logged in!");
-                            userToken = serverMessage.substring(26);
+                        userToken = serverMessage.substring(26);
                         System.out.println(userToken);
                         loginnamelabel.setText(nameField.getText());
                         loginnamelabel1.setText(nameField.getText());
@@ -304,25 +307,109 @@ public class FoilMakerClient extends JFrame {
                 String text = "STARTNEWGAME--" + userToken;
                 out.println(text);
                 try {
-                    String serverMessage = in.readLine();
-                    if(serverMessage.contains("SUCCESS")) {
-                        resultlabel2.setText("success,gamed created!");
-                        gameToken = serverMessage.substring(33);
-                        System.out.println(gameToken);
-                        loginnamelabel.setText(nameField.getText());
-                        keylabel.setText("                                   "+gameToken);
-                        layout.show(Mainpanel,"waiting");
-                        if(serverMessage.contains("NEWPARTICIPANT")) {
+                    //String serverMessage = in.readLine();
+                    String serverMessage = "";
+                    while((serverMessage=in.readLine())!=null) {
+                        System.out.println(serverMessage);
+
+                        if (serverMessage.contains("SUCCESS")) {
+                            System.out.println("get in");
+                            resultlabel2.setText("success,gamed created!");
+                            gameToken = serverMessage.substring(33);
+                            System.out.println(gameToken);
+                            loginnamelabel.setText(nameField.getText());
+                            keylabel.setText("                                   " + gameToken);
+                                break;
+                        }
+                        if (serverMessage.contains("USERNOTLOGGEDIN"))
+                            resultlabel2.setText("error,invalid usertoken!");
+                        if (serverMessage.contains("FAILURE"))
+                            resultlabel2.setText("created game failed!");
+                        if (serverMessage.contains("NEWPARTICIPANT")) {
                             String partitipantname = serverMessage.substring(16);
-                            participateText.append("--> " +partitipantname+"\n");
-                            resultlabel2.setText(partitipantname+"joined game!");
+                            participateText.append("--> " + partitipantname + "\n");
+                            resultlabel2.setText(partitipantname + "joined game!");
                             System.out.println("new participant");
                         }
                     }
-                    if(serverMessage.contains("USERNOTLOGGEDIN"))
-                        resultlabel2.setText("error,invalid usertoken!");
-                    if(serverMessage.contains("FAILURE"))
-                        resultlabel2.setText("created game failed!");
+                    layout.show(Mainpanel, "waiting");
+                    //create new thread for reading process
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String serverMessage="";
+                            try {
+                                while ((serverMessage = in.readLine()) != null) {
+                                    System.out.println(serverMessage);
+                                    boolean flag = false;
+                                    if (serverMessage.contains("SUCCESS")) {
+                                        flag = true;
+                                        System.out.println("get in");
+                                        resultlabel2.setText("success,gamed created!");
+                                        gameToken = serverMessage.substring(33);
+                                        System.out.println(gameToken);
+                                        layout.show(Mainpanel, "waiting");
+                                        loginnamelabel.setText(nameField.getText());
+                                        keylabel.setText("                                   " + gameToken);
+
+                                    }
+                                    if (serverMessage.contains("USERNOTLOGGEDIN"))
+                                        resultlabel2.setText("error,invalid usertoken!");
+                                    if (serverMessage.contains("FAILURE"))
+                                        resultlabel2.setText("created game failed!");
+                                    if (serverMessage.contains("NEWPARTICIPANT")) {
+                                        String partitipantname = serverMessage.substring(16);
+                                        participateText.append("--> " + partitipantname + "\n");
+                                        resultlabel2.setText(partitipantname + "joined game!");
+                                        System.out.println("new participant");
+                                        startGamebutton.setEnabled(true);
+                                    }
+                                }
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                    }).start();
+
+//                    new Thread(new Runnable() {
+//
+//
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                while ((serverMessage = in.readLine()) != null) {
+//                                    System.out.println(serverMessage);
+//                                    boolean flag = false;
+//                                    if (serverMessage.contains("SUCCESS")) {
+//                                        flag = true;
+//                                        System.out.println("get in");
+//                                        resultlabel2.setText("success,gamed created!");
+//                                        gameToken = serverMessage.substring(33);
+//                                        System.out.println(gameToken);
+//                                        layout.show(Mainpanel, "waiting");
+//                                        loginnamelabel.setText(nameField.getText());
+//                                        keylabel.setText("                                   " + gameToken);
+//
+//
+//                                    }
+//                                    if (serverMessage.contains("USERNOTLOGGEDIN"))
+//                                        resultlabel2.setText("error,invalid usertoken!");
+//                                    if (serverMessage.contains("FAILURE"))
+//                                        resultlabel2.setText("created game failed!");
+//                                    if (serverMessage.contains("NEWPARTICIPANT")) {
+//                                        String partitipantname = serverMessage.substring(16);
+//                                        participateText.append("--> " + partitipantname + "\n");
+//                                        resultlabel2.setText(partitipantname + "joined game!");
+//                                        System.out.println("new participant");
+//                                    }
+//                                }
+//
+//                            } catch (Exception e) {
+//
+//                        }
+//
+//
+//                    }).start();
 
 
                 }
@@ -367,15 +454,48 @@ public class FoilMakerClient extends JFrame {
                     error.printStackTrace();
                 }
             }
+            if(e.getSource()==startGamebutton)
+            {
+                String text = "ALLPARTICIPANTSHAVEJOINED--" + userToken +"--" +gameToken;
+                out.println(text);
+                try {
+                    String serverMessage = in.readLine();
+                    if(serverMessage.contains("SUCCESS")) {
+                        resultlabel3.setText("joined a game!");
+                        joinname.setText(nameField.getText());
+                        layout.show(Mainpanel,"joinGamePanelwaiting");
+
+                    }
+                    if(serverMessage.contains("USERNOTLOGGEDIN"))
+                        resultlabel3.setText("error,invalid usertoken!");
+                    if(serverMessage.contains("USERNOTGAMELEADER"))
+                        resultlabel3.setText("User already playing the game!");
+                    if(serverMessage.contains("GAMEKEYNOTFOUND"))
+                        resultlabel3.setText("invalid game token!");
+
+                }
+                catch (
+                        IOException error
+                        )
+
+                {
+                    error.printStackTrace();
+                }
+            }
         }
     }
     public static void main(String[] args) {
+        Thread thread = new Thread() {
+            public void run() {
+                FoilMakerClient gui = new FoilMakerClient();
+                gui.setTitle("FoilMaker!");
+                gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gui.setSize(350,600);
+                gui.setVisible(true);
+            }
+        };
+        thread.start();
 
-        FoilMakerClient gui = new FoilMakerClient();
-        gui.setTitle("FoilMaker!");
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setSize(350,600);
-        gui.setVisible(true);
 
 
 
