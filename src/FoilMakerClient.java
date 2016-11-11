@@ -23,6 +23,7 @@ public class FoilMakerClient extends JFrame {
     private String gameToken;
     JLabel loginnamelabel;
     JLabel loginnamelabel1;
+    JLabel FinalnameLabel = new JLabel("  ");
     JPanel Mainpanel;
     JTextArea participateText = new JTextArea(15,15);
     JLabel participantsLabel = new JLabel("Participants:");
@@ -84,6 +85,7 @@ public class FoilMakerClient extends JFrame {
 
     public FoilMakerClient() {
         score=0;
+
         Mainpanel = new JPanel(layout);
         add(Mainpanel);
         JPanel panel = new JPanel(new GridBagLayout());
@@ -109,8 +111,7 @@ public class FoilMakerClient extends JFrame {
         gamepanel1.setBorder(border);
         finalPanel = new JPanel(new GridBagLayout());
         finalPanel.setBorder(border);
-        finalPanelTextField1.setBackground(Color.yellow);
-        finalPanelTextField2.setBackground(Color.pink);
+
         finalPanellabel1.setBorder(border);
         finalPanellabel2.setBorder(border);
         Mainpanel.add(gamepanel1,"gamepanel1");
@@ -149,6 +150,7 @@ public class FoilMakerClient extends JFrame {
         Registerbutton.addActionListener(e);
         Loginbutton.addActionListener(e);
         gamePanel1submit.addActionListener(e);
+        pickoptionSubmit.addActionListener(e);
         String serverIP = "localhost";
         int serverPort = 2003;
         try
@@ -295,6 +297,7 @@ public class FoilMakerClient extends JFrame {
         c1.gridy=2;
         gamePanel1TextField.setBackground(Color.orange);
         gamePanel1TextField.setEditable(false);
+        gamePanel1TextField.setBorder(border);
         gamepanel1.add(gamePanel1TextField,c1);
         c1.gridx=0;
         c1.gridy=3;
@@ -355,16 +358,40 @@ public class FoilMakerClient extends JFrame {
         pickoptionpanelresultlabel.setBorder(border);
         pickoptionpanel.add(pickoptionpanelresultlabel,c1);
 
+        //--------FINAL page----
+
+        FinalnameLabel.setBorder(border);
+        FinalnameLabel.setBackground(Color.orange);
+        finalPanelTextField1.setBackground(Color.yellow);
+        finalPanelTextField1.setBorder(border);
+        finalPanelTextField2.setBackground(Color.pink);
+        finalPanelTextField2.setBorder(border);
+        finalPanelTextField1.setLineWrap(true);
+        finalPanelTextField2.setLineWrap(true);
         c1.gridx=0;
         c1.gridy = GridBagConstraints.RELATIVE;
         c1.insets = new Insets(2, 2, 2, 2);
+        finalPanel.add(FinalnameLabel,c1);
         finalPanel.add(finalPanellabel1,c1);
+        c1.weightx=1.0;
+        c1.weighty=1.0;
+        finalPanelTextField1.setEditable(false);
+        finalPanelTextField2.setEditable(false);
+        c1.fill = GridBagConstraints.BOTH;
         finalPanel.add(finalPanelTextField1,c1);
+        c1.weightx=0;
+        c1.weighty=0;
         finalPanel.add(finalPanellabel2,c1);
+        c1.weightx=1.0;
+        c1.weighty=1.0;
+        c1.fill = GridBagConstraints.BOTH;
         finalPanel.add(finalPanelTextField2,c1);
+        c1.weightx=0;
+        c1.weighty=0;
         finalPanel.add(finalPanelNextRoundButton,c1);
         finalPanel.add(finalPanelresultlabel,c1);
         gamePanel1suggestionText.addActionListener(e);
+        finalPanelNextRoundButton.addActionListener(e);
 
 
     }
@@ -615,11 +642,11 @@ public class FoilMakerClient extends JFrame {
                         String serverMessage="";
                         try {
 
-                               String mySuggestion = "PLAYERSUGGESTION--" + userToken + "--" + gameToken + "--" + gamePanel1suggestionText.getText();
+                            String mySuggestion = "PLAYERSUGGESTION--" + userToken + "--" + gameToken + "--" + gamePanel1suggestionText.getText();
 
                             //else{
-                              // gamePanel1submit.setEnabled(false);
-                          // }
+                            // gamePanel1submit.setEnabled(false);
+                            // }
                             out.println(mySuggestion);
                             while ((serverMessage = in.readLine()) != null) {
 
@@ -687,11 +714,11 @@ public class FoilMakerClient extends JFrame {
 
                                         }
                                     }
-                                    if(e.getSource()==gamePanel1submit){
-                                        layout.show(Mainpanel, "finalPanel");
+                                    break;
 
-                                        break;
-                                    }
+
+
+
 
                                 }
 
@@ -705,6 +732,7 @@ public class FoilMakerClient extends JFrame {
 
             }
             if(e.getSource()==pickoptionSubmit){
+                FinalnameLabel.setText(loginnamelabel.getText());
                 String choice =  "";
                 if(option1Radio.isSelected())
                     choice = option1Radio.getText();
@@ -715,7 +743,9 @@ public class FoilMakerClient extends JFrame {
                 System.out.println(choice);
                 String msg = "PLAYERCHOICE"+ "--"+ userToken + "--"+ gameToken+"--"+choice;
                 out.println(msg);
-                new Thread( new Runnable() {
+
+                new Thread(new Runnable()
+                {
                     @Override
                     public void run() {
                         String serverMessage;
@@ -730,7 +760,64 @@ public class FoilMakerClient extends JFrame {
                                 } else if (serverMessage.contains("INVALIDMESSAGEFORMAT")) {
                                     pickoptionpanelresultlabel.setText("Invalid message format!");
                                 } else if (serverMessage.contains("ROUNDRESULT")) {
-                                    layout.show(Mainpanel,"finalPanel");
+                                    layout.show(Mainpanel, "finalPanel");
+                                    String overallresult = "";
+                                    String s = serverMessage;
+                                    s = s.substring(13);
+                                    /*if (s.contains("fooled")) {
+                                        int index = s.indexOf(".");
+                                        String sentence1 = s.substring(0, index);
+                                        s = s.substring(index + 1);
+                                        index = s.indexOf(".");
+                                        String sentence2 = s.substring(0, index);
+                                        s = s.substring(index + 3);
+                                        index = s.indexOf("-");
+                                        String score1 = s.substring(0, index);
+                                        s = s.substring(index + 2);
+                                        index = s.indexOf("-");
+                                        String fooled1 = s.substring(0, index);
+                                        s = s.substring(index + 2);
+                                        index = s.indexOf("-");
+                                        String fooledby1 = s.substring(0, index);
+                                        s = s.substring(index + 2);
+                                        index = s.indexOf(".");
+                                        String sentence3 = s.substring(index);
+                                        s = s.substring(index + 3);
+                                        index = s.indexOf("-");
+                                        String score2 = s.substring(0, index);
+                                        s = s.substring(index + 2);
+                                        index = s.indexOf("-");
+                                        String fooled2 = s.substring(0, index);
+                                        s = s.substring(index + 2);
+                                        String fooledby2 = s;
+                                        String currentusername = "";
+                                        String guestusername = "";
+                                        if (sentence3.contains(loginnamelabel.getText())) {
+                                            finalPanelTextField1.setText(sentence3);
+                                            guestusername = loginnamelabel.getText();
+                                        }
+                                        if (sentence1.contains(loginnamelabel.getText())) {
+                                            finalPanelTextField1.setText(sentence1 + sentence2);
+                                            currentusername = loginnamelabel.getText();
+                                        }
+                                        overallresult += currentusername + "==>Score" + score1 + "fooled: " + fooled1 + "fooledby:" + fooledby1 + "\n" +
+                                                guestusername + "==>Score" + score2 + "fooled: " + fooled2 + "fooledby:" + fooledby2 + "\n";
+
+                                        finalPanelTextField2.setText(overallresult);
+
+                                    }*/
+                                    String ss = serverMessage.substring(13);
+                                     if(ss.contains(loginnamelabel.getText()+"--You got it right!")){
+                                         finalPanelTextField1.setText(loginnamelabel.getText()+"--You got it right!");
+                                         if(ss.contains(loginnamelabel+"--You got it right!.You fooled "))
+                                             finalPanelTextField1.setText(loginnamelabel.getText()+"--You got it right! you fooled your opponent.");
+                                     }
+                                    if(ss.contains(loginnamelabel+"--You were fooled by"))
+                                        finalPanelTextField1.setText(loginnamelabel.getText()+"--You were fooled by your opponent!");
+                                    if(ss.contains(loginnamelabel+"--You fooled "))
+                                        finalPanelTextField1.setText(loginnamelabel.getText()+"--You fooled your opponent!");
+
+                                    finalPanelTextField2.setText(serverMessage.substring(13));
                                 }
                             }
                         } catch (IOException e1) {
@@ -739,6 +826,9 @@ public class FoilMakerClient extends JFrame {
                     }
                 }).start();
 
+            }
+            if(e.getSource()==finalPanelNextRoundButton){
+                layout.show(Mainpanel,"gamepanel1");
             }
 
 
