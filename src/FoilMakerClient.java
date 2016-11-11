@@ -1,6 +1,7 @@
 /**
  * Created by zhengwu on 10/19/16.
  */
+//package project3;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
@@ -13,9 +14,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Random;
 
 public class FoilMakerClient extends JFrame {
     private int score;
+    private String roundResult;
     private String userToken;
     private String gameToken;
     JLabel loginnamelabel;
@@ -44,6 +47,7 @@ public class FoilMakerClient extends JFrame {
     JLabel resultlabel3 = new JLabel("                                             ");
     JLabel resultlabel4 = new JLabel("Joined game: waiting for leader                     ");
     JLabel gamePanel1resultlabel = new JLabel("                                             ");
+    JLabel pickoptionpanelresultlabel = new JLabel("Pick your choice            ");
     JLabel namelabel = new JLabel("username:");
     JLabel passlabel = new JLabel("Password:");
     Border border = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
@@ -62,6 +66,22 @@ public class FoilMakerClient extends JFrame {
     JLabel gamePanel1suggestionLabel = new JLabel("Your suggestion");
     JTextField gamePanel1suggestionText = new JTextField(25);
     JButton gamePanel1submit = new JButton("Submit Suggestion");
+    JLabel pickoptionpanellabel = new JLabel("Pick your option below:");
+    JRadioButton option1Radio = new JRadioButton();
+    JRadioButton option2Radio= new JRadioButton();
+    JRadioButton option3Radio= new JRadioButton();
+    ButtonGroup group = new ButtonGroup();
+    JButton pickoptionSubmit = new JButton("Submit Option");
+    JPanel pickoptionpanel;
+    //------oh my lady gaga--final-panel
+    JPanel finalPanel;
+    JLabel finalPanellabel1 = new JLabel("Round Result");
+    JTextArea finalPanelTextField1 = new JTextArea(15,15);
+    JLabel finalPanellabel2 = new JLabel("Overall Results");
+    JTextArea finalPanelTextField2 = new JTextArea(15,15);
+    JButton finalPanelNextRoundButton = new JButton("Next Round");
+    JLabel finalPanelresultlabel = new JLabel("Click <Next Round> when ready!");
+
     public FoilMakerClient() {
         score=0;
         Mainpanel = new JPanel(layout);
@@ -71,6 +91,9 @@ public class FoilMakerClient extends JFrame {
         joinGamePanel = new JPanel(new GridBagLayout());
         joingamewaitingpanel = new JPanel(new GridBagLayout());
         gamepanel1 = new JPanel(new GridBagLayout());
+        pickoptionpanel = new JPanel(new GridBagLayout());
+        pickoptionpanel.setBorder(border);
+        Mainpanel.add(pickoptionpanel,"pickoptionpanel");
         joingamewaitingpanel.setBorder(border);
         Mainpanel.add(joingamewaitingpanel,"joinGamePanelwaiting");
         panel.setBorder(border);
@@ -84,7 +107,14 @@ public class FoilMakerClient extends JFrame {
         layout.show(Mainpanel, "loginpanel");
         joinGamePanel.setBorder(border);
         gamepanel1.setBorder(border);
+        finalPanel = new JPanel(new GridBagLayout());
+        finalPanel.setBorder(border);
+        finalPanelTextField1.setBackground(Color.yellow);
+        finalPanelTextField2.setBackground(Color.pink);
+        finalPanellabel1.setBorder(border);
+        finalPanellabel2.setBorder(border);
         Mainpanel.add(gamepanel1,"gamepanel1");
+        Mainpanel.add(finalPanel,"finalPanel");
         Mainpanel.add(joinGamePanel,"joinGamePanel");
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -120,7 +150,7 @@ public class FoilMakerClient extends JFrame {
         Loginbutton.addActionListener(e);
         gamePanel1submit.addActionListener(e);
         String serverIP = "localhost";
-        int serverPort = 2005;
+        int serverPort = 2003;
         try
 
         {
@@ -280,7 +310,61 @@ public class FoilMakerClient extends JFrame {
         c1.insets = new Insets(120, 60, 0, 60);
         gamePanel1resultlabel.setBorder(border);
         gamepanel1.add(gamePanel1resultlabel,c1);
+        option1Radio.addActionListener(e);
+        option2Radio.addActionListener(e);
+        option3Radio.addActionListener(e);
 
+        //------option panel
+        group.add(option1Radio);
+        group.add(option2Radio);
+        group.add(option3Radio);
+
+        c1.gridx=0;
+        c1.gridy=0;
+        c1.insets = new Insets(5, 5, 5, 5);
+        pickoptionpanel.setBorder(border);
+        pickoptionpanel.add(loginnamelabel,c1);
+        c1.gridx=0;
+        c1.gridy=1;
+        c1.insets = new Insets(5, 5, 5, 5);
+        pickoptionpanel.add(pickoptionpanellabel,c1);
+        c1.gridx=0;
+        c1.gridy=2;
+        c1.gridx = 0;
+        c1.anchor = GridBagConstraints.WEST;
+        c1.gridy = GridBagConstraints.RELATIVE;
+
+        c1.insets = new Insets(5, 5, 5, 5);
+        pickoptionpanel.add(option1Radio,c1);
+        c1.gridx=0;
+        c1.gridy=3;
+        c1.insets = new Insets(5, 5, 5, 5);
+        pickoptionpanel.add(option2Radio,c1);
+        c1.gridx=0;
+        c1.gridy=4;
+        c1.insets = new Insets(5, 5, 5, 5);
+        pickoptionpanel.add(option3Radio,c1);
+        c1.gridx=0;
+        c1.gridy=5;
+        c1.insets = new Insets(0, 0, 0, 0);
+        c1.anchor = GridBagConstraints.CENTER;
+        pickoptionpanel.add(pickoptionSubmit,c1);
+        c1.gridx=0;
+        c1.gridy=6;
+        c1.insets = new Insets(120, 60, 0, 60);
+        pickoptionpanelresultlabel.setBorder(border);
+        pickoptionpanel.add(pickoptionpanelresultlabel,c1);
+
+        c1.gridx=0;
+        c1.gridy = GridBagConstraints.RELATIVE;
+        c1.insets = new Insets(2, 2, 2, 2);
+        finalPanel.add(finalPanellabel1,c1);
+        finalPanel.add(finalPanelTextField1,c1);
+        finalPanel.add(finalPanellabel2,c1);
+        finalPanel.add(finalPanelTextField2,c1);
+        finalPanel.add(finalPanelNextRoundButton,c1);
+        finalPanel.add(finalPanelresultlabel,c1);
+        gamePanel1suggestionText.addActionListener(e);
 
 
     }
@@ -436,29 +520,30 @@ public class FoilMakerClient extends JFrame {
                 gameToken = joinkeyText.getText();
                 out.println(text);
                 try {
-                String serverMessage = in.readLine();
-                if(serverMessage.contains("SUCCESS")) {
-                    resultlabel3.setText("joined a game!");
-                    joinname.setText(nameField.getText());
-                    layout.show(Mainpanel,"joinGamePanelwaiting");
 
-                }
-                if(serverMessage.contains("USERNOTLOGGEDIN"))
-                    resultlabel3.setText("error,invalid usertoken!");
-                if(serverMessage.contains("FAILURE"))
-                    resultlabel3.setText("created game failed!");
-                if(serverMessage.contains("GAMEKEYNOTFOUND"))
-                    resultlabel3.setText("invalid game token!");
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             String serverMessage="";
                             try {
                                 while ((serverMessage = in.readLine()) != null) {
+                                    if(serverMessage.contains("SUCCESS")) {
+                                        resultlabel3.setText("joined a game!");
+                                        joinname.setText(nameField.getText());
+                                        layout.show(Mainpanel,"joinGamePanelwaiting");
+
+                                    }
+                                    if(serverMessage.contains("USERNOTLOGGEDIN"))
+                                        resultlabel3.setText("error,invalid usertoken!");
+                                    if(serverMessage.contains("FAILURE"))
+                                        resultlabel3.setText("created game failed!");
+                                    if(serverMessage.contains("GAMEKEYNOTFOUND"))
+                                        resultlabel3.setText("invalid game token!");
 
                                     System.out.println(serverMessage);
                                     if(serverMessage.contains("NEWGAMEWORD")) {
                                         layout.show(Mainpanel, "gamepanel1");
+
                                         String s1 = serverMessage.substring(13);
                                         int index = s1.indexOf('-');
                                         s1 = s1.substring(0,index);
@@ -474,12 +559,9 @@ public class FoilMakerClient extends JFrame {
                     }).start();
 
             }
-                catch (
-                        IOException error
-                        )
+                catch (Exception e1){
 
-                {
-                    error.printStackTrace();
+                    e1.printStackTrace();
                 }
             }
             if(e.getSource()==startGamebutton)
@@ -487,6 +569,7 @@ public class FoilMakerClient extends JFrame {
                 String text = "ALLPARTICIPANTSHAVEJOINED--" + userToken +"--" +gameToken;
                 out.println(text);
                 layout.show(Mainpanel, "gamepanel1");
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -531,7 +614,12 @@ public class FoilMakerClient extends JFrame {
                     public void run() {
                         String serverMessage="";
                         try {
-                            String mySuggestion = "PLAYERSUGGESTION--" +userToken +"--"+ gameToken +"--"+gamePanel1suggestionText.getText();
+
+                               String mySuggestion = "PLAYERSUGGESTION--" + userToken + "--" + gameToken + "--" + gamePanel1suggestionText.getText();
+
+                            //else{
+                              // gamePanel1submit.setEnabled(false);
+                          // }
                             out.println(mySuggestion);
                             while ((serverMessage = in.readLine()) != null) {
 
@@ -545,7 +633,67 @@ public class FoilMakerClient extends JFrame {
                                 else if (serverMessage.contains("INVALIDMESSAGEFORMAT")) {
                                     gamePanel1resultlabel.setText("Invalid message format!");
                                 }
+                                else if(serverMessage.contains("ROUNDOPTIONS")){
+                                    layout.show(Mainpanel, "pickoptionpanel");
+                                    System.out.println(serverMessage);
+                                    String s1 = serverMessage.substring(14);
+                                    int index1 = s1.indexOf('-');
+                                    String option1 = s1.substring(0,index1);
+                                    System.out.println(option1);
+                                    s1= s1.substring(index1+2);
+                                    index1=s1.indexOf('-');
+                                    String option2 = s1.substring(0,index1);
+                                    System.out.println(option2);
+                                    s1= s1.substring(index1+2);
+                                    String option3 = s1.substring(0);
+                                    Random random = new Random();
+                                    int ranInt = random.nextInt(3);
+                                    if(ranInt==0) {
+                                        option1Radio.setText(option1);
+                                        int ranInt1 = random.nextInt(2);
+                                        if(ranInt1==0){
+                                            option2Radio.setText(option2);
+                                            option3Radio.setText(option3);
+                                        }
+                                        else{
+                                            option3Radio.setText(option2);
+                                            option2Radio.setText(option3);
 
+                                        }
+                                    }
+                                    else if(ranInt==1) {
+                                        option1Radio.setText(option2);
+                                        int ranInt1 = random.nextInt(2);
+                                        if(ranInt1==0){
+                                            option2Radio.setText(option1);
+                                            option3Radio.setText(option3);
+                                        }
+                                        else{
+                                            option3Radio.setText(option1);
+                                            option2Radio.setText(option3);
+
+                                        }
+                                    }
+                                    else if(ranInt==2) {
+                                        option1Radio.setText(option3);
+                                        int ranInt1 = random.nextInt(2);
+                                        if(ranInt1==0){
+                                            option2Radio.setText(option1);
+                                            option3Radio.setText(option2);
+                                        }
+                                        else{
+                                            option3Radio.setText(option1);
+                                            option2Radio.setText(option2);
+
+                                        }
+                                    }
+                                    if(e.getSource()==gamePanel1submit){
+                                        layout.show(Mainpanel, "finalPanel");
+
+                                        break;
+                                    }
+
+                                }
 
 
                             }
@@ -556,6 +704,44 @@ public class FoilMakerClient extends JFrame {
                 }).start();
 
             }
+            if(e.getSource()==pickoptionSubmit){
+                String choice =  "";
+                if(option1Radio.isSelected())
+                    choice = option1Radio.getText();
+                else if(option2Radio.isSelected())
+                    choice = option2Radio.getText();
+                else if(option3Radio.isSelected())
+                    choice = option3Radio.getText();
+                System.out.println(choice);
+                String msg = "PLAYERCHOICE"+ "--"+ userToken + "--"+ gameToken+"--"+choice;
+                out.println(msg);
+                new Thread( new Runnable() {
+                    @Override
+                    public void run() {
+                        String serverMessage;
+                        try {
+                            while ((serverMessage = in.readLine()) != null) {
+                                if (serverMessage.contains("USERNOTLOGGEDIN")) {
+                                    pickoptionpanelresultlabel.setText("error,invalid usertoken!");
+                                } else if (serverMessage.contains("INVALIDGAMETOKEN")) {
+                                    pickoptionpanelresultlabel.setText("invalid game token!");
+                                } else if (serverMessage.contains("UNEXPECTEDMESSAGETYPE")) {
+                                    pickoptionpanelresultlabel.setText("unexpected message type!");
+                                } else if (serverMessage.contains("INVALIDMESSAGEFORMAT")) {
+                                    pickoptionpanelresultlabel.setText("Invalid message format!");
+                                } else if (serverMessage.contains("ROUNDRESULT")) {
+                                    layout.show(Mainpanel,"finalPanel");
+                                }
+                            }
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }).start();
+
+            }
+
+
         }
     }
     public static void main(String[] args) {
@@ -569,9 +755,6 @@ public class FoilMakerClient extends JFrame {
             }
         };
         thread.start();
-
-
-
 
     }
 }
