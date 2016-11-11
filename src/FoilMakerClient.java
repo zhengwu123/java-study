@@ -9,6 +9,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -87,6 +89,7 @@ public class FoilMakerClient extends JFrame {
         score=0;
 
         Mainpanel = new JPanel(layout);
+
         add(Mainpanel);
         JPanel panel = new JPanel(new GridBagLayout());
         startPanel = new JPanel(new GridBagLayout());
@@ -392,7 +395,13 @@ public class FoilMakerClient extends JFrame {
         finalPanel.add(finalPanelresultlabel,c1);
         gamePanel1suggestionText.addActionListener(e);
         finalPanelNextRoundButton.addActionListener(e);
-
+        this.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+                out.println("LOGOUT--");
+            }
+        });
 
     }
     public class event implements ActionListener{
@@ -750,6 +759,7 @@ public class FoilMakerClient extends JFrame {
                     public void run() {
                         String serverMessage;
                         try {
+                            int count =0;
                             while ((serverMessage = in.readLine()) != null) {
                                 if (serverMessage.contains("USERNOTLOGGEDIN")) {
                                     pickoptionpanelresultlabel.setText("error,invalid usertoken!");
@@ -759,7 +769,13 @@ public class FoilMakerClient extends JFrame {
                                     pickoptionpanelresultlabel.setText("unexpected message type!");
                                 } else if (serverMessage.contains("INVALIDMESSAGEFORMAT")) {
                                     pickoptionpanelresultlabel.setText("Invalid message format!");
-                                } else if (serverMessage.contains("ROUNDRESULT")) {
+                                } else if (serverMessage.contains("GAMEOVER")) {
+
+                                    finalPanelNextRoundButton.setEnabled(false);
+
+                                }
+                                else if (serverMessage.contains("ROUNDRESULT")) {
+
                                     layout.show(Mainpanel, "finalPanel");
                                     String overallresult = "";
                                     String s = serverMessage;
@@ -828,10 +844,14 @@ public class FoilMakerClient extends JFrame {
 
             }
             if(e.getSource()==finalPanelNextRoundButton){
+                gamePanel1submit.doClick();
                 layout.show(Mainpanel,"gamepanel1");
             }
 
 
+        }
+        public void close(){
+            out.println("LOGOUT--");
         }
     }
     public static void main(String[] args) {

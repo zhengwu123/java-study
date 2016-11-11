@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fced1502-8328-4a33-a3ac-f555cd147155" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project3/UserDatabase" afterPath="$PROJECT_DIR$/project3/UserDatabase" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project3/WordleDeck" afterPath="$PROJECT_DIR$/project3/WordleDeck" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FoilMakerClient.java" afterPath="$PROJECT_DIR$/src/FoilMakerClient.java" />
     </list>
@@ -32,10 +31,14 @@
       <file leaf-file-name="FoilMakerClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FoilMakerClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64788735">
-              <caret line="836" column="44" selection-start-line="836" selection-start-column="44" selection-end-line="836" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.6197183">
+              <caret line="754" column="0" selection-start-line="754" selection-start-column="0" selection-end-line="754" selection-end-column="0" />
               <folding>
-                <element signature="e#0#38486#0" expanded="true" />
+                <element signature="e#0#39112#0" expanded="true" />
+                <element signature="e#14908#14909#0" expanded="true" />
+                <element signature="e#14963#14964#0" expanded="true" />
+                <element signature="e#38635#38636#0" expanded="true" />
+                <element signature="e#38682#38683#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,8 +106,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="279" />
-    <option name="y" value="24" />
+    <option name="x" value="337" />
+    <option name="y" value="59" />
     <option name="width" value="1280" />
     <option name="height" value="733" />
   </component>
@@ -599,7 +602,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="279" y="24" width="1280" height="733" extended-state="0" />
+    <frame x="337" y="59" width="1280" height="733" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1055,10 +1058,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FoilMakerClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64788735">
-          <caret line="836" column="44" selection-start-line="836" selection-start-column="44" selection-end-line="836" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.6197183">
+          <caret line="754" column="0" selection-start-line="754" selection-start-column="0" selection-end-line="754" selection-end-column="0" />
           <folding>
-            <element signature="e#0#38486#0" expanded="true" />
+            <element signature="e#0#39112#0" expanded="true" />
+            <element signature="e#14908#14909#0" expanded="true" />
+            <element signature="e#14963#14964#0" expanded="true" />
+            <element signature="e#38635#38636#0" expanded="true" />
+            <element signature="e#38682#38683#0" expanded="true" />
           </folding>
         </state>
       </provider>
