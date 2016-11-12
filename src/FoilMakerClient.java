@@ -85,6 +85,22 @@ public class FoilMakerClient extends JFrame {
     JButton finalPanelNextRoundButton = new JButton("Next Round");
     JLabel finalPanelresultlabel = new JLabel("Click <Next Round> when ready!");
 
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public String getGameToken() {
+        return gameToken;
+    }
+
+    public void setGameToken(String gameToken) {
+        this.gameToken = gameToken;
+    }
+
     public FoilMakerClient() {
         score=0;
 
@@ -652,10 +668,6 @@ public class FoilMakerClient extends JFrame {
                         try {
 
                             String mySuggestion = "PLAYERSUGGESTION--" + userToken + "--" + gameToken + "--" + gamePanel1suggestionText.getText();
-
-                            //else{
-                            // gamePanel1submit.setEnabled(false);
-                            // }
                             out.println(mySuggestion);
                             while ((serverMessage = in.readLine()) != null) {
 
@@ -769,7 +781,77 @@ public class FoilMakerClient extends JFrame {
                                     pickoptionpanelresultlabel.setText("unexpected message type!");
                                 } else if (serverMessage.contains("INVALIDMESSAGEFORMAT")) {
                                     pickoptionpanelresultlabel.setText("Invalid message format!");
-                                } else if (serverMessage.contains("GAMEOVER")) {
+                                }
+                                else if (serverMessage.contains("NEWGAMEWORD") ) {
+                                    //if(e.getSource()==finalPanelNextRoundButton)
+                                    //layout.show(Mainpanel,"gamepanel1");
+                                    String s1 = serverMessage.substring(13);
+                                    int index = s1.indexOf('-');
+                                    s1 = s1.substring(0,index);
+                                    gamePanel1TextField.setText(s1);
+                                        break;
+                                }
+
+                                else if(serverMessage.contains("ROUNDOPTIONS")){
+                                    layout.show(Mainpanel, "pickoptionpanel");
+                                    System.out.println(serverMessage);
+                                    String s1 = serverMessage.substring(14);
+                                    int index1 = s1.indexOf('-');
+                                    String option1 = s1.substring(0,index1);
+                                    System.out.println(option1);
+                                    s1= s1.substring(index1+2);
+                                    index1=s1.indexOf('-');
+                                    String option2 = s1.substring(0,index1);
+                                    System.out.println(option2);
+                                    s1= s1.substring(index1+2);
+                                    String option3 = s1.substring(0);
+                                    Random random = new Random();
+                                    int ranInt = random.nextInt(3);
+                                    if(ranInt==0) {
+                                        option1Radio.setText(option1);
+                                        int ranInt1 = random.nextInt(2);
+                                        if(ranInt1==0){
+                                            option2Radio.setText(option2);
+                                            option3Radio.setText(option3);
+                                        }
+                                        else{
+                                            option3Radio.setText(option2);
+                                            option2Radio.setText(option3);
+
+                                        }
+                                    }
+                                    else if(ranInt==1) {
+                                        option1Radio.setText(option2);
+                                        int ranInt1 = random.nextInt(2);
+                                        if(ranInt1==0){
+                                            option2Radio.setText(option1);
+                                            option3Radio.setText(option3);
+                                        }
+                                        else{
+                                            option3Radio.setText(option1);
+                                            option2Radio.setText(option3);
+
+                                        }
+                                    }
+                                    else if(ranInt==2) {
+                                        option1Radio.setText(option3);
+                                        int ranInt1 = random.nextInt(2);
+                                        if(ranInt1==0){
+                                            option2Radio.setText(option1);
+                                            option3Radio.setText(option2);
+                                        }
+                                        else{
+                                            option3Radio.setText(option1);
+                                            option2Radio.setText(option2);
+
+                                        }
+                                    }
+                                   // break;
+
+
+
+
+                                }else if (serverMessage.contains("GAMEOVER")) {
 
                                     finalPanelNextRoundButton.setEnabled(false);
 
@@ -833,7 +915,20 @@ public class FoilMakerClient extends JFrame {
                                     if(ss.contains(loginnamelabel+"--You fooled "))
                                         finalPanelTextField1.setText(loginnamelabel.getText()+"--You fooled your opponent!");
 
-                                    finalPanelTextField2.setText(serverMessage.substring(13));
+
+                                        String fs = serverMessage.substring(13);
+                                    StringBuilder sb = new StringBuilder();
+                                    for( int i=0;i<fs.length()-1;i++){
+                                        if(Character.isLetter(fs.charAt(i))||fs.charAt(i)=='.'||fs.charAt(i)=='!'||fs.charAt(i)==' ')
+                                            continue;
+                                        if(fs.charAt(i)==fs.charAt(i+1)&& fs.charAt(i)=='-')
+                                            continue;
+                                        sb.append(s.charAt(i));
+
+                                    }
+                                    sb.append(fs.charAt(fs.length()-1));
+                                    String result = "(Host score)(fooled)(foolby), (Guest score)(fooled)(foolby).\n";
+                                    finalPanelTextField2.setText(result+sb.toString());
                                 }
                             }
                         } catch (IOException e1) {
@@ -844,7 +939,7 @@ public class FoilMakerClient extends JFrame {
 
             }
             if(e.getSource()==finalPanelNextRoundButton){
-                gamePanel1submit.doClick();
+                //startGamebutton.doClick();
                 layout.show(Mainpanel,"gamepanel1");
             }
 
