@@ -8,10 +8,12 @@ public class FoilUser {
     private int fooled;
     private int beenfooled;
 
-    FoilUser(String username,String password){
+    FoilUser(String username,String password,int score,int fooled,int beenfooled){
         this.username= username;
         this.password = password;
-
+        this.score = score;
+        this.fooled = fooled;
+        this.beenfooled = beenfooled;
 
     }
 
@@ -26,5 +28,40 @@ public class FoilUser {
     }
     public int getBeenfooled(){
         return this.beenfooled;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setFooled(int fooled) {
+        this.fooled = fooled;
+    }
+
+    public void setBeenfooled(int beenfooled) {
+        this.beenfooled = beenfooled;
+    }
+
+    public String getUsername() {
+
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void increaseScore(){
+        score++;
+    }
+    public void increaseFooled(){
+        fooled++;
+    }
+    public void increaseBeenFooled(){
+        beenfooled++;
     }
 }
