@@ -10,7 +10,7 @@ public class FileIOTest {
         BufferedWriter out = null;
         try {
 // File reader
-            in = new BufferedReader(new FileReader(new File("/Users/new/Desktop/cs180/project3/UserDatabase"))); // File writer
+            in = new BufferedReader(new FileReader(new File("WordleDeck"))); // File writer
             out = new BufferedWriter(new FileWriter(new File("output.txt")));
 // Copy line-by-line
             String line;

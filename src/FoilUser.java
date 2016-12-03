@@ -55,13 +55,18 @@ public class FoilUser {
         return password;
     }
 
-    public void increaseScore(){
-        score++;
+    public void increaseScore(int val){
+        score+=val;
     }
     public void increaseFooled(){
         fooled++;
     }
     public void increaseBeenFooled(){
         beenfooled++;
+    }
+
+    @Override
+    public String toString() {
+        return username +":"+password+":"+score+":"+fooled+":"+beenfooled;
     }
 }
