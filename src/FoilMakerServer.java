@@ -7,6 +7,8 @@ import java.util.*;
 
 public class FoilMakerServer implements Runnable {
     Socket ssocket;
+    static int anwsercounter =0;
+    static String rightanswer="";
     private HashMap<String, FoilUser> hm = new HashMap<String, FoilUser>();
     //This writer can writer to both clients
     static PrintWriter mainout;
@@ -84,7 +86,7 @@ public class FoilMakerServer implements Runnable {
     @Override
     public void run() {
         String myGuess="";
-        String rightanswer="";
+
         InputStreamReader isr = null;
         BufferedReader tin = null;
         BufferedWriter tout = null;
@@ -212,7 +214,7 @@ public class FoilMakerServer implements Runnable {
                     if(words[1].equals(token)&& playingFlag==true){
                         out.println("RESPONSE--JOINGAME--FAILURE--"+words[2]);
                 }
-                    if(words[1].equals(token)&& playingFlag==false){
+                    if(words[1].equals(token)&& playingFlag==false&&words[2].equals(gameToken)){
                         //gameToken = generateRandomString3();
                         mainout.println("NEWPARTICIPANT--"+username+"--0");
                         mainoutholder.println("RESPONSE--JOINGAME--SUCCESS--"+words[2]);
@@ -245,14 +247,10 @@ public class FoilMakerServer implements Runnable {
                         }
                         String ql=questionlist.get(0).toString();
                         String parts[] = ql.split(" : ");
+
                         mainoutholder.println("NEWGAMEWORD--"+parts[0]+"--"+parts[1]);
                         mainout.println("NEWGAMEWORD--"+parts[0]+"--"+parts[1]);
-                        questionlist.remove(0);
                         System.out.println("questionlist size"+ questionlist.size());
-                        if(questionlist.size()==0) {
-                            mainoutholder.println("GAMEOVER--");
-                            mainout.println("GAMEOVER--");
-                        }
 
                     }
 
@@ -284,6 +282,8 @@ public class FoilMakerServer implements Runnable {
                             String word1 = Suggestionlist.get(0).toString();
                             String word2 = Suggestionlist.get(1).toString();
                             Suggestionlist.clear();
+                            questionlist.remove(0);
+
                             if(ranInt==0) {
                                 mainoutholder.println("ROUNDOPTIONS--"+word1+"--"+word2+"--"+rightanswer);
                                 mainout.println("ROUNDOPTIONS--"+word2+"--"+word1+"--"+rightanswer);
@@ -302,6 +302,7 @@ public class FoilMakerServer implements Runnable {
                 }
 
                 if (words[0].equals("PLAYERCHOICE")) {
+                    anwsercounter++;
                     if(!words[1].equals(token)){
                         out.println("RESPONSE--PLAYERCHOICE--USERNOTLOGGEDIN--");
                     }
@@ -319,7 +320,9 @@ public class FoilMakerServer implements Runnable {
 
 
                     }
-                    if(words[3].length()>0 && !words[3].equals(rightanswer) && !words[3].equals(myGuess)){
+                    if(!words[3].equals(rightanswer) && !words[3].equals(myGuess)){
+                        System.out.println("right-anwser"+rightanswer);
+                        System.out.println("myguess"+myGuess);
                         //case current user picked the wrong answer suggested by opponent
 
                         hm.get(username).increaseBeenFooled();
@@ -333,8 +336,9 @@ public class FoilMakerServer implements Runnable {
                         hm.get(opponentname).increaseScore(5);
 
 
-                        mainout.println("ROUNDRESULT--" + username + "--You were fooled by " + opponentname + ".--"+hm.get(username).getScore()+"--"+hm.get(username).getFooled()+"--"+hm.get(username).getBeenfooled()+"--" + opponentname + "--You got it right!.You fooled " + username + "--"+hm.get(opponentname).getScore()+"--"+hm.get(opponentname).getFooled()+"--"+hm.get(opponentname).getBeenfooled());
-                        mainoutholder.println("ROUNDRESULT--" + username + "--You were fooled by " + opponentname + ".--"+hm.get(username).getScore()+"--"+hm.get(username).getFooled()+"--"+hm.get(username).getBeenfooled()+"--" + opponentname + "--You got it right!.You fooled " + username + "--"+hm.get(opponentname).getScore()+"--"+hm.get(opponentname).getFooled()+"--"+hm.get(opponentname).getBeenfooled());
+                                mainout.println("ROUNDRESULT--" + username + "--You were fooled by " + opponentname + ".--" + hm.get(username).getScore() + "--" + hm.get(username).getFooled() + "--" + hm.get(username).getBeenfooled() + "--" + opponentname + "--You got it right!.You fooled " + username + "--" + hm.get(opponentname).getScore() + "--" + hm.get(opponentname).getFooled() + "--" + hm.get(opponentname).getBeenfooled());
+                                mainoutholder.println("ROUNDRESULT--" + username + "--You were fooled by " + opponentname + ".--" + hm.get(username).getScore() + "--" + hm.get(username).getFooled() + "--" + hm.get(username).getBeenfooled() + "--" + opponentname + "--You got it right!.You fooled " + username + "--" + hm.get(opponentname).getScore() + "--" + hm.get(opponentname).getFooled() + "--" + hm.get(opponentname).getBeenfooled());
+
                         //case current user fooled other
                         //if(username.equals(leader)) {
                             //mainoutholder.println("ROUNDRESULT--" + username + "--You were fooled by " + leader + ".--0--0--1--" + leader + "--You got it right!.You fooled " + username + ".--15--1--0");
@@ -342,10 +346,10 @@ public class FoilMakerServer implements Runnable {
                         //}
 
                     }
-                    if(words[3].length()>0 && words[3].equals(rightanswer)){
+                    if(words[3].equals(rightanswer)){
                         //case current user picked the right answer
+                        hm.get(username).increaseScore(5);
 
-                        hm.get(username).increaseScore(10);
                         //case current user fooledby other
                         String opponentname="";
                         if(username.equals(guest))
@@ -354,9 +358,10 @@ public class FoilMakerServer implements Runnable {
                             opponentname=guest;
 
 
-                        mainout.println("ROUNDRESULT--" + username + "--You got it right! " + "--"+hm.get(username).getScore()+"--"+hm.get(username).getFooled()+"--"+hm.get(username).getBeenfooled()+"--" + opponentname + "--You got it right!." + "--"+hm.get(opponentname).getScore()+"--"+hm.get(opponentname).getFooled()+"--"+hm.get(opponentname).getBeenfooled());
 
-                        mainoutholder.println("ROUNDRESULT--" + username + "--You got it right! " + "--"+hm.get(username).getScore()+"--"+hm.get(username).getFooled()+"--"+hm.get(username).getBeenfooled()+"--" + opponentname + "--You got it right!." + "--"+hm.get(opponentname).getScore()+"--"+hm.get(opponentname).getFooled()+"--"+hm.get(opponentname).getBeenfooled());
+                        mainout.println("ROUNDRESULT--" + username + "--You got it right!." + "--"+hm.get(username).getScore()+"--"+hm.get(username).getFooled()+"--"+hm.get(username).getBeenfooled()+"--" + opponentname + "--You got it right!." + "--"+hm.get(opponentname).getScore()+"--"+hm.get(opponentname).getFooled()+"--"+hm.get(opponentname).getBeenfooled());
+
+                        mainoutholder.println("ROUNDRESULT--" + username + "--You got it right!." + "--"+hm.get(username).getScore()+"--"+hm.get(username).getFooled()+"--"+hm.get(username).getBeenfooled()+"--" + opponentname + "--You got it right!." + "--"+hm.get(opponentname).getScore()+"--"+hm.get(opponentname).getFooled()+"--"+hm.get(opponentname).getBeenfooled());
 
                     }
                        /* The server sends next question (NEWGAMEWORD message) as soon as
@@ -365,28 +370,48 @@ public class FoilMakerServer implements Runnable {
                         However the server sends GAMEOVER-- command as it runs out of questions.
                                 Clients can react to this command appropriately
                         and quit. For instance disable the “Next Round” button and set status message as follows.*/
+                    if(questionlist.size()==0) {
+                        mainoutholder.println("GAMEOVER--");
+                        mainout.println("GAMEOVER--");
+                        continue;
+                    }
                     String ql=questionlist.get(0).toString();
                     String parts[] = ql.split(" : ");
                     mainoutholder.println("NEWGAMEWORD--"+parts[0]+"--"+parts[1]);
                     mainout.println("NEWGAMEWORD--"+parts[0]+"--"+parts[1]);
 
 
-
                 }
                 if(words[0].equals("LOGOUT")){
 
-                    //PUT ALL information in the hahsmap into the database.
-                   /* FileWriter writer = new FileWriter(new File("UserDatabase"));
-                    writer.write("");
+                    //PUT ALL information in the hashmap into the database before closing.
+                    tout = new BufferedWriter(new FileWriter(new File("UserDatabase"), false));
+                    tout.write("");
                     Iterator it = hm.entrySet().iterator();
+                    int count =0;
                     while (it.hasNext()) {
                         Map.Entry pair = (Map.Entry)it.next();
-                        writer.write("\n"+pair.getValue().toString());
+                        if(count==0) {
+                            tout.write(pair.getValue().toString());
+                            count++;
+                        }
+                        else {
+                            tout.write("\n" + pair.getValue().toString());
+                        }
                         System.out.println(pair.getValue().toString());
                         it.remove(); // avoids a ConcurrentModificationException
                     }
-
-                        writer.close();*/
+                        if(username!=null && username.equals(leader)) {
+                            mainout.println("RESPONSE--LOGOUT--SUCCESS--");
+                            username=null;
+                        }
+                    if(username!=null && username.equals(guest)) {
+                        mainout.println("RESPONSE--LOGOUT--SUCCESS--");
+                        mainout.println("RESPONSE--LOGOUT--SUCCESS--");
+                        username=null;
+                    }
+                    if(username==null)
+                    mainoutholder.println("RESPONSE--LOGOUT--SUCCESS--");
 
                     }
 

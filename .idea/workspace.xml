@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fced1502-8328-4a33-a3ac-f555cd147155" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/homework3/FileIOTest.class" afterPath="$PROJECT_DIR$/out/production/homework3/FileIOTest.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/homework3/FoilMakerServer.class" afterPath="$PROJECT_DIR$/out/production/homework3/FoilMakerServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/homework3/FoilUser.class" afterPath="$PROJECT_DIR$/out/production/homework3/FoilUser.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserDatabase" afterPath="$PROJECT_DIR$/UserDatabase" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.txt" afterPath="$PROJECT_DIR$/output.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FileIOTest.java" afterPath="$PROJECT_DIR$/src/FileIOTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project3/UserDatabase" afterPath="$PROJECT_DIR$/project3/UserDatabase" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FoilMakerServer.java" afterPath="$PROJECT_DIR$/src/FoilMakerServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FoilUser.java" afterPath="$PROJECT_DIR$/src/FoilUser.java" />
     </list>
     <ignored path="homework3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,22 +35,22 @@
       <file leaf-file-name="FoilMakerServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.1607516">
-              <caret line="253" column="58" selection-start-line="253" selection-start-column="58" selection-end-line="253" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.56404495">
+              <caret line="216" column="94" selection-start-line="216" selection-start-column="94" selection-end-line="216" selection-end-column="94" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#261#279#0" expanded="true" />
+                <element signature="e#328#346#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserDatabase" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserDatabase">
+      <file leaf-file-name="WordleDeck" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WordleDeck">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -83,9 +79,11 @@
       <file leaf-file-name="FoilMakerView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FoilMakerView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.037037">
-              <caret line="18" column="26" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="26" />
-              <folding />
+            <state vertical-scroll-proportion="-5.888889">
+              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/src/FoilMakerRunner.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -104,13 +102,12 @@
         <entry file="file://$PROJECT_DIR$/src/FoilUser.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="69" column="60" selection-start-line="69" selection-start-column="60" selection-end-line="69" selection-end-column="60" />
+              <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
               <folding>
                 <element signature="e#692#693#0" expanded="true" />
                 <element signature="e#730#731#0" expanded="true" />
                 <element signature="e#778#779#0" expanded="true" />
                 <element signature="e#818#819#0" expanded="true" />
-                <element signature="e#857#858#0" expanded="true" />
                 <element signature="e#891#892#0" expanded="true" />
                 <element signature="e#932#933#0" expanded="true" />
                 <element signature="e#968#969#0" expanded="true" />
@@ -224,16 +221,16 @@
         <option value="$PROJECT_DIR$/src/FoilMakerClient.java" />
         <option value="$PROJECT_DIR$/WordleDeck" />
         <option value="$PROJECT_DIR$/src/FoilUser.java" />
-        <option value="$PROJECT_DIR$/UserDatabase" />
         <option value="$PROJECT_DIR$/src/FoilMakerServer.java" />
+        <option value="$PROJECT_DIR$/UserDatabase" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="139" />
-    <option name="y" value="53" />
+    <option name="x" value="172" />
+    <option name="y" value="79" />
     <option name="width" value="1596" />
-    <option name="height" value="718" />
+    <option name="height" value="681" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -680,8 +677,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.FoilMakerServer" />
-        <item index="1" class="java.lang.String" itemvalue="Application.FileIOTest" />
-        <item index="2" class="java.lang.String" itemvalue="Application.FoilMakerRunner" />
+        <item index="1" class="java.lang.String" itemvalue="Application.FoilMakerRunner" />
+        <item index="2" class="java.lang.String" itemvalue="Application.FileIOTest" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.RecursionTest" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.RecursionTest.testDeterminantOneByOneZero" />
       </list>
@@ -733,17 +730,17 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="139" y="53" width="1596" height="718" extended-state="1" />
+    <frame x="172" y="79" width="1596" height="681" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3220339" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3220339" sideWeight="0.4924812" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28614458" sideWeight="0.51549757" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17719568" sideWeight="0.48450243" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18300654" sideWeight="0.50751877" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17418547" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -799,7 +796,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1137,32 +1134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FoilMakerView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.037037">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/output.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1189,16 +1160,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.888889">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FoilMakerRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/FoilUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="60" selection-start-line="69" selection-start-column="60" selection-end-line="69" selection-end-column="60" />
+          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
           <folding>
             <element signature="e#692#693#0" expanded="true" />
             <element signature="e#730#731#0" expanded="true" />
             <element signature="e#778#779#0" expanded="true" />
             <element signature="e#818#819#0" expanded="true" />
-            <element signature="e#857#858#0" expanded="true" />
             <element signature="e#891#892#0" expanded="true" />
             <element signature="e#932#933#0" expanded="true" />
             <element signature="e#968#969#0" expanded="true" />
@@ -1228,20 +1226,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UserDatabase">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.15889831">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FoilMakerServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.1607516">
-          <caret line="253" column="58" selection-start-line="253" selection-start-column="58" selection-end-line="253" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.56404495">
+          <caret line="216" column="94" selection-start-line="216" selection-start-column="94" selection-end-line="216" selection-end-column="94" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#261#279#0" expanded="true" />
+            <element signature="e#328#346#0" expanded="true" />
           </folding>
         </state>
       </provider>
